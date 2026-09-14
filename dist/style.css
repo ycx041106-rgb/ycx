@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --ink:#102e36;
+  --sea:#0b6574;
+  --mist:#e7f1ef;
+  --sun:#f5c251;
+  --paper:#fbfaf5;
+  --line:#cddedb;
+  --hokkaido:#58d5a0;
+  --tohoku:#c6b0d3;
+  --kanto:#f4bd73;
+  --chubu:#f0a4ad;
+  --kinki:#ec7773;
+  --chugoku:#45ced5;
+  --shikoku:#78a9df;
+  --kyushu:#9de4df;
+}
+
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; overflow-x:hidden; background:var(--paper); color:var(--ink); font:16px/1.65 'Noto Sans SC',sans-serif; }
+button, a { -webkit-tap-highlight-color:transparent; }
+[hidden] { display:none !important; }
+
+header { height:76px; display:flex; align-items:center; justify-content:space-between; max-width:1180px; margin:auto; padding:0 24px; }
+.brand { color:var(--ink); font:700 22px 'Playfair Display','Noto Sans SC',serif; text-decoration:none; }
+.brand span { color:var(--sea); }
+nav { display:flex; gap:27px; }
+nav a { color:var(--ink); font-size:.9rem; text-decoration:none; }
+nav a:hover { color:var(--sea); }
+
+.eyebrow { margin:0 0 12px; color:var(--sea); font-size:.75rem; font-weight:700; letter-spacing:.15em; }
+.intro { display:grid; grid-template-columns:1.15fr .65fr; gap:80px; align-items:end; max-width:1180px; margin:auto; padding:76px 24px 92px; }
+.intro h1, .section-head h2, .guide h2, .pref-hero h1, .pref-content h2 { margin:0; font-family:'Playfair Display','Noto Sans SC',serif; line-height:1.12; letter-spacing:-.035em; }
+.intro h1 { max-width:760px; font-size:clamp(3rem,6.5vw,5.6rem); }
+.intro-copy { padding-bottom:10px; }
+.intro-copy p { margin:0 0 25px; color:#45636a; }
+.start { display:inline-flex; gap:26px; align-items:center; padding:13px 18px; background:var(--sea); color:#fff; font-size:.9rem; text-decoration:none; }
+.start b { font-size:1.2rem; }
+
+.map-section, .guide { padding:84px max(24px,calc((100vw - 1180px)/2)); }
+.map-section { background:var(--mist); }
+.section-head { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:27px; }
+.section-head h2, .guide h2 { font-size:clamp(2rem,4vw,3.6rem); }
+#resultCount { color:#527178; font-size:.88rem; }
+
+.filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+.filters button { padding:9px 15px; border:1px solid #b9cfca; background:transparent; color:var(--ink); cursor:pointer; font:500 .9rem 'Noto Sans SC',sans-serif; }
+.filters button:hover, .filters button.active { border-color:var(--sea); background:var(--sea); color:#fff; }
+.filters button:focus-visible { outline:3px solid var(--sun); outline-offset:2px; }
+
+.atlas-workspace { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(270px,.7fr); min-height:730px; overflow:hidden; border:1px solid #bcd4cf; background:#f7fbf9; box-shadow:0 18px 45px rgba(20,69,73,.08); }
+.map-panel { position:relative; display:flex; flex-direction:column; justify-content:center; min-width:0; padding:22px 18px 14px; border-right:1px solid var(--line); background:linear-gradient(145deg,#f9fcfb,#e8f3f0); }
+.map-canvas { display:grid; min-height:610px; place-items:center; }
+.map-loading, .map-error { color:#6a8588; font-size:.9rem; }
+.japan-map { display:block; width:min(100%,720px); height:auto; max-height:690px; overflow:visible; }
+.prefecture-shape { cursor:pointer; outline:none; transition:opacity .2s ease; }
+.prefecture-shape path { stroke:#f8fbf9; stroke-width:1.6; vector-effect:non-scaling-stroke; transition:filter .16s ease, opacity .16s ease, stroke .16s ease; }
+.prefecture-shape:hover path, .prefecture-shape:focus path { filter:brightness(.88) saturate(1.15) drop-shadow(0 2px 2px rgba(12,55,64,.24)); stroke:var(--ink); stroke-width:2.4; }
+.prefecture-shape.is-muted { opacity:.13; }
+.prefecture-shape.is-muted:hover, .prefecture-shape.is-muted:focus { opacity:.72; }
+.region-hokkaido path { fill:var(--hokkaido); }
+.region-tohoku path { fill:var(--tohoku); }
+.region-kanto path { fill:var(--kanto); }
+.region-chubu path { fill:var(--chubu); }
+.region-kinki path { fill:var(--kinki); }
+.region-chugoku path { fill:var(--chugoku); }
+.region-shikoku path { fill:var(--shikoku); }
+.region-kyushu path { fill:var(--kyushu); }
+.map-label { fill:#173a40; stroke:rgba(255,255,255,.94); stroke-width:3.5; paint-order:stroke; font-size:10px; font-weight:700; pointer-events:none; text-anchor:middle; }
+.okinawa-inset { fill:rgba(255,255,255,.46); stroke:#b7ceca; stroke-dasharray:4 4; }
+.inset-label { fill:#668387; font-size:12px; font-weight:600; letter-spacing:.08em; }
+.map-legend { display:flex; flex-wrap:wrap; justify-content:center; gap:7px 13px; margin-top:3px; }
+.map-legend span { display:inline-flex; align-items:center; gap:6px; color:#496a70; font-size:.72rem; }
+.map-legend span::before { width:10px; height:10px; border-radius:2px; content:''; }
+.hokkaido-key::before { background:var(--hokkaido); }.tohoku-key::before { background:var(--tohoku); }.kanto-key::before { background:var(--kanto); }.chubu-key::before { background:var(--chubu); }.kinki-key::before { background:var(--kinki); }.chugoku-key::before { background:var(--chugoku); }.shikoku-key::before { background:var(--shikoku); }.kyushu-key::before { background:var(--kyushu); }
+.map-credit { margin:10px 0 0; color:#789093; font-size:.65rem; text-align:center; }
+.map-credit a { color:inherit; }
+
+.map-sidebar { display:flex; flex-direction:column; min-height:0; background:#fff; }
+.map-inspector { min-height:230px; padding:31px 30px 25px; border-bottom:1px solid var(--line); }
+.map-inspector h3 { margin:0 0 10px; font:700 2.35rem 'Playfair Display','Noto Sans SC',serif; line-height:1.1; }
+.map-inspector p { margin:7px 0; color:#587278; font-size:.87rem; }
+.map-inspector .inspector-season { color:var(--sea); font-weight:700; }
+.map-inspector a { display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:12px; border-top:1px solid var(--line); color:var(--ink); font-size:.86rem; font-weight:700; text-decoration:none; }
+.map-inspector a span { color:var(--sea); font-size:1.15rem; }
+.pref-directory-head { display:flex; justify-content:space-between; padding:15px 22px 10px; color:#4e6d71; font-size:.78rem; font-weight:700; }
+.pref-directory-head small { color:#82999b; font-weight:400; }
+.pref-directory { display:grid; grid-template-columns:1fr 1fr; gap:1px; max-height:470px; padding:0 14px 15px; overflow-y:auto; }
+.pref-directory a { display:grid; grid-template-columns:25px 1fr; padding:8px; border-bottom:1px solid #edf1ee; color:var(--ink); text-decoration:none; }
+.pref-directory a:hover, .pref-directory a:focus { background:var(--mist); }
+.pref-directory b { color:#7b9699; font-size:.67rem; font-weight:600; }
+.pref-directory span { font-size:.84rem; font-weight:600; }
+.pref-directory small { grid-column:2; color:#83999b; font-size:.62rem; }
+
+.guide { display:grid; grid-template-columns:1fr 1.2fr; gap:85px; background:var(--ink); color:#f5f7f0; }
+.guide .eyebrow { color:var(--sun); }
+.guide-content>p:first-child { margin-top:0; color:#d3e3df; }
+.route-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:30px 0; background:#31535a; }
+.route-grid article { padding:18px; background:var(--ink); }
+.route-grid span { color:var(--sun); font:700 1.4rem 'Playfair Display'; }
+.route-grid h3 { margin:7px 0; font-size:1rem; }
+.route-grid p { margin:0; color:#b5cdca; font-size:.78rem; }
+.small { color:#91b4af; font-size:.82rem; }
+
+.prefecture-view { max-width:1180px; margin:auto; padding:36px 24px 90px; }
+.back-link { display:inline-block; margin:8px 0 28px; color:var(--sea); font-size:.88rem; font-weight:600; text-decoration:none; }
+.pref-hero { position:relative; display:flex; align-items:end; justify-content:space-between; min-height:340px; overflow:hidden; padding:50px; }
+.pref-hero>div:first-child { position:relative; z-index:1; max-width:650px; }
+.pref-hero h1 { font-size:clamp(4rem,10vw,7.7rem); }
+.pref-hero>div:first-child>p:last-child { max-width:560px; margin:19px 0 0; font-size:1.03rem; }
+.pref-code { position:absolute; right:26px; top:-74px; color:rgba(16,46,54,.09); font:700 clamp(13rem,30vw,24rem)/1 'Playfair Display',serif; }
+.region-surface-hokkaido { background:var(--hokkaido); }.region-surface-tohoku { background:var(--tohoku); }.region-surface-kanto { background:var(--kanto); }.region-surface-chubu { background:var(--chubu); }.region-surface-kinki { background:var(--kinki); }.region-surface-chugoku { background:var(--chugoku); }.region-surface-shikoku { background:var(--shikoku); }.region-surface-kyushu { background:var(--kyushu); }
+.quick-facts { display:grid; grid-template-columns:.9fr 1.5fr .9fr; border:1px solid var(--line); border-top:0; background:#fff; }
+.quick-facts article { min-height:130px; padding:24px; border-right:1px solid var(--line); }
+.quick-facts article:last-child { border-right:0; }
+.quick-facts span { display:block; margin-bottom:9px; color:#718b8f; font-size:.72rem; letter-spacing:.06em; }
+.quick-facts strong { font-size:.94rem; line-height:1.55; }
+.pref-content { display:grid; grid-template-columns:1.7fr .75fr; gap:60px; padding:78px 0; }
+.pref-content h2 { margin-bottom:28px; font-size:clamp(2rem,4vw,3.2rem); }
+.spot-list { border-top:1px solid var(--line); }
+.spot-list article { display:grid; grid-template-columns:46px 1fr; gap:13px; padding:21px 0; border-bottom:1px solid var(--line); }
+.spot-list b { color:var(--sea); font:700 1.05rem 'Playfair Display',serif; }
+.spot-list h3 { margin:0 0 3px; font-size:1.1rem; }
+.spot-list p { margin:0; color:#6e8588; font-size:.83rem; }
+.content-aside { align-self:start; padding:28px; background:var(--mist); }
+.content-aside h2 { margin-bottom:16px; font-size:1.65rem; }
+.content-aside p, .content-aside li { color:#547176; font-size:.86rem; }
+.content-aside ul { margin:13px 0 0; padding-left:19px; }
+.content-aside li { margin:7px 0; }
+.pref-pagination { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.pref-pagination a { display:flex; flex-direction:column; padding:22px 4px; color:var(--ink); text-decoration:none; }
+.pref-pagination a:last-child { align-items:flex-end; border-left:1px solid var(--line); }
+.pref-pagination small { color:#789094; font-size:.7rem; }
+.pref-pagination span { font-size:1.05rem; font-weight:700; }
+
+footer { padding:27px; color:#5a7478; font-size:.76rem; text-align:center; }
+
+@media (max-width:900px) {
+  .intro { grid-template-columns:1fr; gap:28px; }
+  .atlas-workspace { grid-template-columns:1fr; }
+  .map-panel { border-right:0; border-bottom:1px solid var(--line); }
+  .map-sidebar { display:grid; grid-template-columns:.85fr 1.15fr; }
+  .map-inspector { border-right:1px solid var(--line); border-bottom:0; }
+  .pref-directory { max-height:330px; }
+  .guide { gap:48px; }
+  .pref-content { gap:35px; }
+}
+
+@media (max-width:680px) {
+  header { height:64px; }
+  nav { gap:14px; }
+  nav a { font-size:.78rem; }
+  nav a:last-child { display:none; }
+  .intro { padding-top:52px; padding-bottom:62px; }
+  .intro h1 { font-size:clamp(2.75rem,13vw,4.1rem); overflow-wrap:anywhere; }
+  .intro-copy p { overflow-wrap:anywhere; }
+  .map-section, .guide { padding-top:55px; padding-bottom:55px; }
+  .section-head { align-items:start; flex-direction:column; margin-bottom:20px; }
+  .atlas-workspace { min-height:0; }
+  .map-panel { padding:12px 4px 14px; }
+  .map-canvas { min-height:430px; }
+  .japan-map { max-height:500px; }
+  .map-label { font-size:8px; stroke-width:3; }
+  .map-sidebar { display:block; }
+  .map-inspector { min-height:0; border-right:0; border-bottom:1px solid var(--line); }
+  .pref-directory { grid-template-columns:repeat(3,1fr); max-height:390px; }
+  .pref-directory a { grid-template-columns:1fr; text-align:center; }
+  .pref-directory b, .pref-directory small { display:none; }
+  .guide { grid-template-columns:1fr; gap:30px; }
+  .route-grid { grid-template-columns:1fr; }
+  .prefecture-view { padding-top:22px; }
+  .pref-hero { min-height:280px; padding:32px 25px; }
+  .pref-hero h1 { font-size:3.9rem; }
+  .pref-code { right:8px; top:-15px; font-size:13rem; }
+  .quick-facts { grid-template-columns:1fr; }
+  .quick-facts article { min-height:0; border-right:0; border-bottom:1px solid var(--line); }
+  .quick-facts article:last-child { border-bottom:0; }
+  .pref-content { grid-template-columns:1fr; padding:55px 0; }
+}
+
