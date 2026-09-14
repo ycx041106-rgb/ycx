@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="从上海出发，探索日本47个都道府县的自然、温泉与美食。" />
+  <title>日本47都道府县旅行图鉴</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%230b6574' d='M32 4 58 17v30L32 60 6 47V17z'/%3E%3Cpath fill='%23f5c251' d='M32 14c10 0 18 8 18 18S42 50 32 50 14 42 14 32s8-18 18-18Z'/%3E%3C/svg%3E" />
+  <script>document.write('<base href="' + (location.hostname.endsWith('github.io') ? '/ycx/' : '/') + '">')</script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <a class="brand" href="./">旅日图鉴 <span>47</span></a>
+    <nav><a href="./#map">都道府县地图</a><a href="./#guide">上海出发</a></nav>
+  </header>
+
+  <main id="homeView">
+    <section class="intro">
+      <div><p class="eyebrow">JAPAN TRAVEL ATLAS · FROM SHANGHAI</p><h1>一张地图，<br>认识日本四十七县。</h1></div>
+      <div class="intro-copy"><p>按自然、温泉、美食、人文或购物筛选，在地图上直接选择目的地。每个都道府县都有独立页面，方便继续补充。</p><a class="start" href="#map">从地图开始 <b>↓</b></a></div>
+    </section>
+
+    <section id="map" class="map-section">
+      <div class="section-head">
+        <div><p class="eyebrow">PICK A PREFECTURE</p><h2>日本都道府县地图</h2></div>
+        <span id="resultCount">47 个目的地</span>
+      </div>
+
+      <div class="filters" aria-label="旅行主题筛选">
+        <button class="active" data-filter="all">全部</button>
+        <button data-filter="nature">自然风光</button>
+        <button data-filter="onsen">温泉</button>
+        <button data-filter="food">美食</button>
+        <button data-filter="culture">人文</button>
+        <button data-filter="shopping">购物</button>
+      </div>
+
+      <div class="atlas-workspace">
+        <div class="map-panel">
+          <div id="mapCanvas" class="map-canvas" aria-live="polite"><div class="map-loading">地图载入中…</div></div>
+          <div class="map-legend" aria-label="地区图例">
+            <span class="hokkaido-key">北海道</span><span class="tohoku-key">东北</span><span class="kanto-key">关东</span><span class="chubu-key">中部</span><span class="kinki-key">近畿</span><span class="chugoku-key">中国</span><span class="shikoku-key">四国</span><span class="kyushu-key">九州·冲绳</span>
+          </div>
+          <p class="map-credit">境界数据：日本国土交通省 2025 年行政区域数据，经<a href="https://github.com/kyodo-official/japan-choropleth" target="_blank" rel="noreferrer">共同通信社</a>加工；<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>。本站调整显示样式。</p>
+        </div>
+        <aside class="map-sidebar">
+          <div id="mapInspector" class="map-inspector"><p class="eyebrow">MAP GUIDE</p><h3>移动到一个县</h3><p>这里会显示最佳季节和主要景点；点击地图即可进入它的独立页面。</p></div>
+          <div class="pref-directory-head"><span>都道府县目录</span><small>点击进入子页面</small></div>
+          <div id="prefDirectory" class="pref-directory"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="guide" class="guide">
+      <div><p class="eyebrow">FROM SHANGHAI</p><h2>先到门户城市，<br>再把日本走深。</h2></div>
+      <div class="guide-content"><p>航班时刻与航线调整频繁，本图鉴将交通写成可执行的「门户 + 接驳」思路：先查询上海出发的当季航班，再衔接国内线或新干线。</p><div class="route-grid"><article><span>01</span><h3>关东门户</h3><p>经东京成田 / 羽田，适合关东、甲信越、东北及北海道东部。</p></article><article><span>02</span><h3>关西门户</h3><p>经大阪关西，适合关西、山阴山阳、四国与九州东部。</p></article><article><span>03</span><h3>中部与福冈</h3><p>经名古屋或福冈，衔接中部山岳、九州各县及冲绳。</p></article></div><p class="small">订票前请以航空公司与铁路官方实时班次为准；偏远离岛优先预留一晚中转缓冲。</p></div>
+    </section>
+  </main>
+
+  <main id="prefectureView" class="prefecture-view" hidden></main>
+  <footer>日本47都道府县旅行图鉴 · 从地图开始，逐县完善。</footer>
+  <script src="app.js"></script>
+</body>
+</html>
+
